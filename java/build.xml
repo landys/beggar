@@ -1,0 +1,43 @@
+<project name="Beggar" default="build" basedir=".">
+
+	<property name="debug" value="off"/>
+	<property name="optimize" value="on"/>
+
+	<property name="project.name" value="Beggar"/>
+	
+	<property name="bin.dir" value="./bin"/>
+	<property name="src.dir" value="./src"/>
+	<property name="lib.dir" value="."/>
+<!--
+	<property name="swt.dir" value="./lib/swt.jar"/>
+
+	<path id="classpath.common">
+		<pathelement location="${swt.dir}"/>
+	</path>
+-->
+	<target name="build">
+		<mkdir dir="${bin.dir}"/>
+		<javac destdir="${bin.dir}" srcdir="${src.dir}"
+			debug="${debug}" optimize="${optimize}">
+<!--			<classpath refid="classpath.common"/> -->
+		</javac>
+		<copy todir="${bin.dir}">
+			<fileset dir="${src.dir}" includes="**/*.xml"/>
+		</copy>
+	</target>
+
+	<target name="jar" depends="build">
+		<jar jarfile="${bin.dir}/${project.name}.jar" basedir="./bin" excludes="**/CVS/* **/*.jar **/*.zip">
+			<manifest>
+				<attribute name="Built-By" value="zju cser"/>
+				<attribute name="Main-Class" value="zju.beggar.BeggarApp"/>
+<!--				<attribute name="Class-Path" value="${swt.dir}"/> -->
+				<attribute name="Sealed" value="false"/>
+			</manifest>
+		</jar>
+	</target>
+	
+	<target name="clean">
+		<delete dir="${bin.dir}"/>
+	</target>
+</project>

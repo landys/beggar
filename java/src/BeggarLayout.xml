@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beggar>
+	<tabItem id="process" text="process" class="ProcessTabAction">
+		<!-- I.e. left=a;b => left=a*x+b, and x is the left of its parent. -->
+		<table id="processTable" left="0;9" right="100;-9" top="0;10" bottom="100;-45" scrolled="true"/>
+		<button id="stopProcess" text="Stop Process" right="100;-9" top="100;-36"/>
+		<button id="detailInfomation" text="Detail Information" right="100;-85" top="100;-36"/>
+		<button id="showAllUsers" text="Show All Users' Processes" left="0;9" top="100;-36"/>
+	</tabItem>
+	
+	<tabItem id="cpu" text="cpu1" class="CpuTab">
+		<panel left="10;10" right="90;-10" top="0;10" bottom="80;10">
+			<table id="processTable" left="20;10" right="80;-10" top="10;10" bottom="70;10"/>
+			<button left="20;10" top="70;20" text="Click Me" />
+		</panel>
+		<!-- 
+		<menu>
+			<menuItem text="hello" />
+			<menuItem text="world" />
+		</menu>
+		-->
+	</tabItem>
+	
+	<tabItem text="cpu">
+		<!-- I.e. left=a;b => left=a*x+b, and x is the left of its parent. -->
+		<table id="processTable" left="0;0" right="100;0" top="0;0" bottom="100;0"/>
+
+	</tabItem>
+	
+	<tabItem text="cpu2">
+		<table id="processTable" left="10;10" right="90;-10" top="0;10" bottom="80;10" />
+	</tabItem>
+	
+	<tabItem text="cpu3">
+		<table id="processTable" left="10;10" right="90;-10" top="0;10" bottom="80;10" />
+	</tabItem>
+</beggar>

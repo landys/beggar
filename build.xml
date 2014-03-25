@@ -1,0 +1,59 @@
+<project name="Beggar" default="release" basedir=".">
+
+	<property name="java_dir" value="./java"/>
+	<property name="cpp_dir" value="./cpp"/>
+	<property name="java_bin_dir" value="${java_dir}/bin"/>
+	<property name="cpp_bin_dir" value="${cpp_dir}/bin"/>
+	<property name="bin_dir" value="bin"/>
+	<condition property="make_command" value="make">
+		<os family="windows" />
+	</condition>
+	<condition property="make_command" value="gmake">
+		<not>
+			<isset property="make_command" />
+		</not>
+	</condition>
+
+	<target name="init">
+		<tstamp />
+	</target>
+
+	<target name="java_build" depends="init">
+		<ant antfile="build.xml" dir="${java_dir}" target="jar" />
+	</target>
+
+	<target name="cpp_build" depends="init">
+		<exec dir="${cpp_dir}" executable="${make_command}">
+		</exec>
+	</target>
+
+	<target name="build" depends="cpp_build,java_build">
+	</target>
+
+	<target name="release" depends="build">
+		<mkdir dir="${bin_dir}" />
+		<copy todir="${bin_dir}">
+			<fileset dir="${cpp_bin_dir}" includes="**/*.so" />
+			<fileset dir="${java_bin_dir}" includes="**/*.jar" />
+		</copy>
+	</target>
+
+	<target name="cpp_clean">
+		<exec dir="${cpp_dir}" executable="${make_command}">
+			<arg value="clean"/>
+		</exec>
+	</target>
+
+	<target name="java_clean">
+		<ant antfile="build.xml" dir="${java_dir}" target="clean" />
+	</target>
+
+	<target name="clean" depends="cpp_clean,java_clean">
+		<delete dir="${bin_dir}"/>
+		<delete>
+			<fileset dir="." includes="**/*.bak **/*~" />
+		</delete>
+	</target>
+
+</project>
+
